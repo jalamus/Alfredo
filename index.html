@@ -7,6 +7,7 @@
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1a1a1a">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Fretboard Master">
@@ -1131,10 +1132,13 @@
 
         // Initialize game when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Small delay to ensure all elements are ready
-            setTimeout(() => {
-                new FretboardMemoryGame();
-            }, 100);
+            console.log('DOM loaded, initializing game...');
+            try {
+                window.fretboardGame = new FretboardMemoryGame();
+                console.log('Game initialized successfully');
+            } catch (error) {
+                console.error('Error initializing game:', error);
+            }
         });
 
         // Prevent iOS Safari bounce effect
@@ -1149,20 +1153,10 @@
             setTimeout(() => {
                 window.scrollTo(0, 0);
                 // Recreate fretboard after orientation change
-                const game = window.fretboardGame;
-                if (game) {
-                    game.createFretboard();
+                if (window.fretboardGame) {
+                    window.fretboardGame.createFretboard();
                 }
             }, 100);
-        });
-
-        // Store game instance globally for debugging
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                if (!window.fretboardGame) {
-                    window.fretboardGame = new FretboardMemoryGame();
-                }
-            }, 200);
         });
     </script>
 </body>
