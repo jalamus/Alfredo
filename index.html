@@ -31,13 +31,19 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
             color: white;
             min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
         }
 
         .game-container {
@@ -407,8 +413,175 @@
         /* Landscape orientation support */
         @media (orientation: landscape) and (max-height: 600px) {
             body {
-                padding: 10px;
+                padding: 5px;
                 justify-content: flex-start;
+                overflow: hidden;
+            }
+            
+            .game-container {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .game-header {
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .game-title {
+                font-size: 1.4rem;
+                margin-bottom: 0;
+                margin-right: 20px;
+            }
+            
+            .game-stats {
+                margin-bottom: 0;
+                gap: 15px;
+                flex: 1;
+                justify-content: flex-end;
+            }
+            
+            .stat {
+                padding: 5px 12px;
+                min-width: 60px;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+                margin-bottom: 2px;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .fretboard-container {
+                margin: 8px 0;
+                padding: 10px;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .fretboard {
+                height: 180px;
+                width: 100%;
+                max-width: 95vw;
+            }
+            
+            .note-button {
+                width: 28px;
+                height: 28px;
+                font-size: 11px;
+            }
+            
+            .message {
+                margin: 5px 0;
+                padding: 8px;
+                min-height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .controls {
+                gap: 10px;
+                margin-top: 8px;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                width: auto;
+                min-width: 120px;
+            }
+            
+            .string-labels {
+                left: -25px;
+            }
+            
+            .string-label {
+                font-size: 10px;
+            }
+            
+            .fret-number {
+                font-size: 10px;
+            }
+        }
+
+        /* Very small landscape screens (iPhone SE horizontal) */
+        @media (orientation: landscape) and (max-height: 450px) {
+            .game-header {
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+            
+            .game-title {
+                font-size: 1.2rem;
+            }
+            
+            .stat {
+                padding: 3px 8px;
+                min-width: 50px;
+            }
+            
+            .stat-label {
+                font-size: 0.6rem;
+            }
+            
+            .stat-value {
+                font-size: 1rem;
+            }
+            
+            .fretboard {
+                height: 140px;
+            }
+            
+            .note-button {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+            
+            .message {
+                padding: 5px;
+                font-size: 0.8rem;
+                min-height: 30px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+        }
+
+        /* Large landscape screens */
+        @media (orientation: landscape) and (min-width: 768px) and (min-height: 600px) {
+            .fretboard {
+                height: 250px;
+                max-width: 90vw;
+            }
+            
+            .note-button {
+                width: 35px;
+                height: 35px;
+                font-size: 13px;
+            }
+        }
+
+        /* Portrait optimization for small screens */
+        @media (orientation: portrait) and (max-height: 700px) {
+            body {
+                padding: 10px 5px;
             }
             
             .game-header {
@@ -417,16 +590,6 @@
             
             .game-title {
                 font-size: 1.8rem;
-                margin-bottom: 5px;
-            }
-            
-            .game-stats {
-                margin-bottom: 10px;
-                gap: 20px;
-            }
-            
-            .stat {
-                padding: 8px 15px;
             }
             
             .fretboard-container {
@@ -438,41 +601,20 @@
                 height: 250px;
             }
             
-            .note-button {
-                width: 35px;
-                height: 35px;
-                font-size: 13px;
-            }
-            
-            .message {
-                margin: 10px 0;
-                padding: 10px;
-                min-height: 40px;
-                font-size: 1rem;
-            }
-            
             .controls {
-                gap: 15px;
                 margin-top: 15px;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-                font-size: 1rem;
             }
         }
 
-        /* Large landscape screens */
-        @media (orientation: landscape) and (min-width: 768px) {
-            .fretboard {
-                height: 300px;
-                max-width: 90vw;
+        /* Prevent horizontal scrolling */
+        @media (max-width: 480px) {
+            .fretboard-container {
+                padding: 10px 5px;
             }
             
-            .note-button {
-                width: 45px;
-                height: 45px;
-                font-size: 15px;
+            .fretboard {
+                width: 100%;
+                max-width: calc(100vw - 20px);
             }
         }
 
