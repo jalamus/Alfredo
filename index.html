@@ -779,6 +779,12 @@
                 this.showNotesBtn = document.getElementById('showNotesBtn');
                 this.resetBtn = document.getElementById('resetBtn');
                 
+                // Check if elements exist
+                if (!this.fretboard) {
+                    console.error('Fretboard element not found!');
+                    return;
+                }
+                
                 // Initialize audio engine
                 this.audioEngine = new AudioEngine();
                 
@@ -818,29 +824,31 @@
                 const installBtn = document.getElementById('installBtn');
                 const closeInstall = document.getElementById('closeInstall');
 
-                window.addEventListener('beforeinstallprompt', (e) => {
-                    e.preventDefault();
-                    deferredPrompt = e;
-                    installPrompt.classList.add('show');
-                });
+                if (installPrompt && installBtn && closeInstall) {
+                    window.addEventListener('beforeinstallprompt', (e) => {
+                        e.preventDefault();
+                        deferredPrompt = e;
+                        installPrompt.classList.add('show');
+                    });
 
-                installBtn.addEventListener('click', async () => {
-                    if (deferredPrompt) {
-                        deferredPrompt.prompt();
-                        const { outcome } = await deferredPrompt.userChoice;
-                        deferredPrompt = null;
+                    installBtn.addEventListener('click', async () => {
+                        if (deferredPrompt) {
+                            deferredPrompt.prompt();
+                            const { outcome } = await deferredPrompt.userChoice;
+                            deferredPrompt = null;
+                            installPrompt.classList.remove('show');
+                        }
+                    });
+
+                    closeInstall.addEventListener('click', () => {
                         installPrompt.classList.remove('show');
-                    }
-                });
+                    });
 
-                closeInstall.addEventListener('click', () => {
-                    installPrompt.classList.remove('show');
-                });
-
-                // Hide install prompt if already installed
-                window.addEventListener('appinstalled', () => {
-                    installPrompt.classList.remove('show');
-                });
+                    // Hide install prompt if already installed
+                    window.addEventListener('appinstalled', () => {
+                        installPrompt.classList.remove('show');
+                    });
+                }
             }
 
             createFretMarkers() {
@@ -1123,7 +1131,10 @@
 
         // Initialize game when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            new FretboardMemoryGame();
+            // Small delay to ensure all elements are ready
+            setTimeout(() => {
+                new FretboardMemoryGame();
+            }, 100);
         });
 
         // Prevent iOS Safari bounce effect
@@ -1137,7 +1148,21 @@
         window.addEventListener('orientationchange', function() {
             setTimeout(() => {
                 window.scrollTo(0, 0);
+                // Recreate fretboard after orientation change
+                const game = window.fretboardGame;
+                if (game) {
+                    game.createFretboard();
+                }
             }, 100);
+        });
+
+        // Store game instance globally for debugging
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (!window.fretboardGame) {
+                    window.fretboardGame = new FretboardMemoryGame();
+                }
+            }, 200);
         });
     </script>
 </body>
