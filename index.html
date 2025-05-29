@@ -5,19 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Fretboard Memory Master</title>
     
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#1a1a1a">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Fretboard Master">
-    
-    <!-- PWA Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iMjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIxODAiIHkyPSIxODAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI2ZmNmIzNSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmNzkzMWUiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
-    
-    <!-- Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkZyZXRib2FyZCBNZW1vcnkgTWFzdGVyIiwKICAic2hvcnRfbmFtZSI6ICJGcmV0Ym9hcmQiLAogICJkZXNjcmlwdGlvbiI6ICJBcHJlbmRlIGVsIGRpYXBhc8OzbiBkZSBndWl0YXJyYSBqdWdhbmRvIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMxYTFhMWEiLAogICJ0aGVtZV9jb2xvciI6ICIjMWExYTFhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRnd0lpQm9aV2xuYUhROUlqRTRNQ0lpSUhacFpYZENiM2c5SWpBZ01DQXhPREFnTVRnd0lpQm1hV3hzUFNKdWIyNWxJaUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lQZ281UEhKbFkzUWdkMmxrZEdnOUlqRTRNQ0lpSUdobGFXZG9kRDBpTVRnd0lpQnllRDBpTWpBaUlHWnBiR3c5SW5WeWJDZ2paMkpoWkdsbGJuUndYekJmYkdsdVpXRnlYekZmTVNsaUx6NEtQR1JsWm5NK1BHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSm5jbUZrYVdWdWREQmZiR2x1WldGeVh6RmZNU0lnZURFOUlqQWlJSGt4UFNJd0lpQjRNajBpTVRnd0lpQjVNajBpTVRnd0lpQm5jbUZrYVdWdWRGVnVhWFJ6UFNKMWMyVnlVM0JoWTJWUGJsVnpaU0krQ2p4emRHOXdJSE4wYjNBdFkyOXNiM0k5SWlObVpqWmlNelVpTHo0S1BITjBiM0FnYjJabWMyVjBQU0l4SWlCemRHOXdMV052Ykc5eVBTSWpaamM1TXpGbElpOCtDand2YkdsdVpXRnlSM0poWkdsbGJuUStDand2WkdWbWN6NEtQQzl6ZG1jK0NnPT0iLAogICAgICAic2l6ZXMiOiAiMTgweDE4MCIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU5UazJJaUJvWldsbmFIUTlJalU1TmlJZ2RtbGxkMEp2ZUQwaU1DQXdJRFU1TmlBMU9UWWlJR1pwYkd3OUltNXZibVVpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrQ2p4eVpXTjBJSGRwWkhSb1BTSTFPVFlpSUdobGFXZG9kRDBpTlRrMklpQnllRDBpTXpBaUlHWnBiR3c5SW5WeWJDZ2paMkpoWkdsbGJuUndiREJmYkdsdVpXRnlYelJmTkNsaUx6NEtQR1JsWm5NK1BHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSm5jbUZrYVdWdWREQmZiR2x1WldGeVh6UmZOQ0lnZURFOUlqQWlJSGt4UFNJd0lpQjRNajBpTlRrMklpQjVNajBpTlRrMklpQm5jbUZrYVdWdWRGVnVhWFJ6UFNKMWMyVnlVM0JoWTJWUGJsVnpaU0krQ2p4emRHOXdJSE4wYjNBdFkyOXNiM0k5SWlObVpqWmlNelVpTHo0S1BITjBiM0FnYjJabWMyVjBQU0l4SWlCemRHOXdMV052Ykc5eVBTSWpaamM1TXpGbElpOCtDand2YkdsdVpXRnlSM0poWkdsbGJuUStDand2WkdWbWN6NEtQQzl6ZG1jK0NnPT0iLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
-    
     <style>
         * {
             margin: 0;
@@ -308,86 +295,99 @@
             font-weight: bold;
         }
 
-        .install-prompt {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #4a90e2, #357abd);
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .install-prompt.show {
-            display: flex;
-        }
-
-        .install-text {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .install-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-install {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .game-title {
-                font-size: 2rem;
+        /* Portrait optimization for better vertical display */
+        @media (orientation: portrait) {
+            body {
+                padding: 15px 10px;
+                justify-content: flex-start;
+            }
+            
+            .game-container {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .game-header {
+                margin-bottom: 20px;
+            }
+            
+            .fretboard-container {
+                margin: 20px 0;
+                padding: 20px 15px;
             }
             
             .fretboard {
-                height: 350px;
+                height: 320px;
+                width: 100%;
             }
             
             .note-button {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
+                width: 42px;
+                height: 42px;
+                font-size: 15px;
             }
             
             .controls {
+                margin-top: 20px;
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
             
             .btn {
-                width: 200px;
-            }
-
-            .fretboard-container {
-                padding: 20px;
+                width: 250px;
+                padding: 12px 20px;
             }
         }
 
-        @media (max-width: 480px) {
+        /* Portrait optimization for small screens */
+        @media (orientation: portrait) and (max-height: 700px) {
             body {
-                padding: 10px;
+                padding: 10px 5px;
+            }
+            
+            .game-header {
+                margin-bottom: 15px;
+            }
+            
+            .game-title {
+                font-size: 1.8rem;
+            }
+            
+            .fretboard-container {
+                margin: 15px 0;
+                padding: 15px;
             }
             
             .fretboard {
                 height: 280px;
+            }
+            
+            .note-button {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+            
+            .controls {
+                margin-top: 15px;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 220px;
+                padding: 10px 18px;
+            }
+        }
+
+        /* Portrait for very small screens */
+        @media (orientation: portrait) and (max-height: 600px) {
+            .game-title {
+                font-size: 1.6rem;
+            }
+            
+            .fretboard {
+                height: 240px;
             }
             
             .note-button {
@@ -396,12 +396,10 @@
                 font-size: 12px;
             }
             
-            .game-stats {
-                gap: 15px;
-            }
-            
-            .stat {
-                padding: 10px 15px;
+            .btn {
+                width: 200px;
+                padding: 8px 16px;
+                font-size: 1rem;
             }
         }
 
@@ -573,114 +571,6 @@
             }
         }
 
-        /* Portrait optimization for better vertical display */
-        @media (orientation: portrait) {
-            body {
-                padding: 15px 10px;
-                justify-content: flex-start;
-            }
-            
-            .game-container {
-                width: 100%;
-                max-width: none;
-            }
-            
-            .game-header {
-                margin-bottom: 20px;
-            }
-            
-            .fretboard-container {
-                margin: 20px 0;
-                padding: 20px 15px;
-            }
-            
-            .fretboard {
-                height: 320px;
-                width: 100%;
-            }
-            
-            .note-button {
-                width: 42px;
-                height: 42px;
-                font-size: 15px;
-            }
-            
-            .controls {
-                margin-top: 20px;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .btn {
-                width: 250px;
-                padding: 12px 20px;
-            }
-        }
-
-        /* Portrait optimization for small screens */
-        @media (orientation: portrait) and (max-height: 700px) {
-            body {
-                padding: 10px 5px;
-            }
-            
-            .game-header {
-                margin-bottom: 15px;
-            }
-            
-            .game-title {
-                font-size: 1.8rem;
-            }
-            
-            .fretboard-container {
-                margin: 15px 0;
-                padding: 15px;
-            }
-            
-            .fretboard {
-                height: 280px;
-            }
-            
-            .note-button {
-                width: 38px;
-                height: 38px;
-                font-size: 14px;
-            }
-            
-            .controls {
-                margin-top: 15px;
-                gap: 12px;
-            }
-            
-            .btn {
-                width: 220px;
-                padding: 10px 18px;
-            }
-        }
-
-        /* Portrait for very small screens */
-        @media (orientation: portrait) and (max-height: 600px) {
-            .game-title {
-                font-size: 1.6rem;
-            }
-            
-            .fretboard {
-                height: 240px;
-            }
-            
-            .note-button {
-                width: 32px;
-                height: 32px;
-                font-size: 12px;
-            }
-            
-            .btn {
-                width: 200px;
-                padding: 8px 16px;
-                font-size: 1rem;
-            }
-        }
-
         /* Prevent horizontal scrolling */
         @media (max-width: 480px) {
             .fretboard-container {
@@ -756,24 +646,95 @@
         </div>
     </div>
 
-    <!-- Install Prompt -->
-    <div class="install-prompt" id="installPrompt">
-        <div class="install-text">
-            <strong>¡Instala la app!</strong><br>
-            Agrégala a tu pantalla de inicio para una mejor experiencia
-        </div>
-        <button class="install-btn" id="installBtn">Instalar</button>
-        <button class="close-install" id="closeInstall">×</button>
-    </div>
-
     <script>
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVFX05BTUUgPSAnZnJldGJvYXJkLW1lbW9yeS12MS4wJzsKY29uc3QgdXJsc1RvQ2FjaGUgPSBbCiAgJy8nCl07CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2luc3RhbGwnLCAoZXZlbnQpID0+IHsKICBldmVudC53YWl0VW50aWwoCiAgICBjYWNoZXMub3BlbihDQUNIRV9OQU1FKQogICAgICAudGhlbigoY2FjaGUpID0+IGNhY2hlLmFkZEFsbCh1cmxzVG9DYWNoZSkpCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgKGV2ZW50KSA9PiB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4oKHJlc3BvbnNlKSA9PiB7CiAgICAgICAgcmV0dXJuIHJlc3BvbnNlIHx8IGZldGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICB9KQogICk7Cn0pOw==');
+        // Audio Context for note sounds
+        class AudioEngine {
+            constructor() {
+                this.audioContext = null;
+                this.isInitialized = false;
+                this.noteFrequencies = {
+                    'C': 261.63, 'C#': 277.18, 'D': 293.66, 'D#': 311.13,
+                    'E': 329.63, 'F': 349.23, 'F#': 369.99, 'G': 392.00,
+                    'G#': 415.30, 'A': 440.00, 'A#': 466.16, 'B': 493.88
+                };
+            }
+
+            async initialize() {
+                if (this.isInitialized) return;
+                
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.isInitialized = true;
+                    console.log('Audio initialized successfully');
+                } catch (error) {
+                    console.log('Audio not supported:', error);
+                }
+            }
+
+            playNote(noteName, string = 0, fret = 0) {
+                if (!this.isInitialized || !this.audioContext) return;
+
+                try {
+                    // Calculate octave based on string and fret
+                    let octave = 3;
+                    if (string <= 1) octave = 4; // High strings
+                    else if (string <= 3) octave = 3; // Mid strings  
+                    else octave = 2; // Low strings
+                    
+                    // Adjust octave based on fret
+                    octave += Math.floor(fret / 12);
+                    if (fret >= 12) octave += 1;
+
+                    const baseFreq = this.noteFrequencies[noteName.replace('#', '#')] || 440;
+                    const frequency = baseFreq * Math.pow(2, octave - 4);
+
+                    // Create guitar-like sound
+                    const oscillator1 = this.audioContext.createOscillator();
+                    const oscillator2 = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+                    const filterNode = this.audioContext.createBiquadFilter();
+
+                    // Main oscillator (fundamental)
+                    oscillator1.type = 'sawtooth';
+                    oscillator1.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+
+                    // Harmonic oscillator
+                    oscillator2.type = 'sine';
+                    oscillator2.frequency.setValueAtTime(frequency * 2, this.audioContext.currentTime);
+
+                    // Filter for more guitar-like sound
+                    filterNode.type = 'lowpass';
+                    filterNode.frequency.setValueAtTime(2000, this.audioContext.currentTime);
+                    filterNode.Q.setValueAtTime(1, this.audioContext.currentTime);
+
+                    // Volume envelope (attack-decay)
+                    gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.3, this.audioContext.currentTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.1, this.audioContext.currentTime + 0.1);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.8);
+
+                    // Connect nodes
+                    oscillator1.connect(filterNode);
+                    oscillator2.connect(filterNode);
+                    filterNode.connect(gainNode);
+                    gainNode.connect(this.audioContext.destination);
+
+                    // Play sound
+                    const now = this.audioContext.currentTime;
+                    oscillator1.start(now);
+                    oscillator2.start(now);
+                    oscillator1.stop(now + 0.8);
+                    oscillator2.stop(now + 0.8);
+                } catch (error) {
+                    console.log('Error playing note:', error);
+                }
+            }
         }
 
         class FretboardMemoryGame {
             constructor() {
+                console.log('Creating FretboardMemoryGame...');
+                
                 this.fretboard = document.getElementById('fretboard');
                 this.message = document.getElementById('message');
                 this.startBtn = document.getElementById('startBtn');
@@ -811,49 +772,19 @@
             }
 
             init() {
+                console.log('Initializing game components...');
                 this.createFretboard();
                 this.createFretMarkers();
                 this.bindEvents();
                 this.updateDisplay();
-                this.setupPWA();
-            }
-
-            setupPWA() {
-                // Install prompt
-                let deferredPrompt;
-                const installPrompt = document.getElementById('installPrompt');
-                const installBtn = document.getElementById('installBtn');
-                const closeInstall = document.getElementById('closeInstall');
-
-                if (installPrompt && installBtn && closeInstall) {
-                    window.addEventListener('beforeinstallprompt', (e) => {
-                        e.preventDefault();
-                        deferredPrompt = e;
-                        installPrompt.classList.add('show');
-                    });
-
-                    installBtn.addEventListener('click', async () => {
-                        if (deferredPrompt) {
-                            deferredPrompt.prompt();
-                            const { outcome } = await deferredPrompt.userChoice;
-                            deferredPrompt = null;
-                            installPrompt.classList.remove('show');
-                        }
-                    });
-
-                    closeInstall.addEventListener('click', () => {
-                        installPrompt.classList.remove('show');
-                    });
-
-                    // Hide install prompt if already installed
-                    window.addEventListener('appinstalled', () => {
-                        installPrompt.classList.remove('show');
-                    });
-                }
+                console.log('Game initialization complete');
             }
 
             createFretMarkers() {
                 const fretMarkers = document.getElementById('fretMarkers');
+                if (!fretMarkers) return;
+                
+                fretMarkers.innerHTML = '';
                 for (let i = 0; i < 12; i++) {
                     const marker = document.createElement('div');
                     marker.className = 'fret-number';
@@ -863,6 +794,9 @@
             }
 
             createFretboard() {
+                console.log('Creating fretboard...');
+                if (!this.fretboard) return;
+                
                 this.fretboard.innerHTML = '';
                 
                 for (let string = 0; string < 6; string++) {
@@ -889,26 +823,34 @@
                         this.fretboard.appendChild(fretDiv);
                     }
                 }
+                console.log('Fretboard created successfully');
             }
 
             bindEvents() {
-                this.startBtn.addEventListener('click', () => this.startGame());
-                this.showNotesBtn.addEventListener('click', () => this.showSequence());
-                this.resetBtn.addEventListener('click', () => this.reset());
+                if (this.startBtn) {
+                    this.startBtn.addEventListener('click', () => this.startGame());
+                }
+                if (this.showNotesBtn) {
+                    this.showNotesBtn.addEventListener('click', () => this.showSequence());
+                }
+                if (this.resetBtn) {
+                    this.resetBtn.addEventListener('click', () => this.reset());
+                }
                 
-                this.fretboard.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('note-button') && this.gameState === 'playing') {
-                        this.handleNoteClick(e.target);
-                    }
-                });
+                if (this.fretboard) {
+                    this.fretboard.addEventListener('click', (e) => {
+                        if (e.target.classList.contains('note-button') && this.gameState === 'playing') {
+                            this.handleNoteClick(e.target);
+                        }
+                    });
 
-                // Touch events for better mobile experience
-                this.fretboard.addEventListener('touchstart', (e) => {
-                    if (e.target.classList.contains('note-button') && this.gameState === 'playing') {
-                        e.preventDefault();
-                        this.handleNoteClick(e.target);
-                    }
-                });
+                    this.fretboard.addEventListener('touchstart', (e) => {
+                        if (e.target.classList.contains('note-button') && this.gameState === 'playing') {
+                            e.preventDefault();
+                            this.handleNoteClick(e.target);
+                        }
+                    });
+                }
             }
 
             startGame() {
@@ -916,8 +858,8 @@
                 this.generateSequence();
                 this.showSequence();
                 this.updateMessage('¡Memoriza esta secuencia!');
-                this.startBtn.disabled = true;
-                this.showNotesBtn.disabled = false;
+                if (this.startBtn) this.startBtn.disabled = true;
+                if (this.showNotesBtn) this.showNotesBtn.disabled = false;
             }
 
             generateSequence() {
@@ -937,28 +879,17 @@
                 
                 this.hideAllNotes();
                 this.gameState = 'showing';
-                this.showNotesBtn.disabled = true;
+                if (this.showNotesBtn) this.showNotesBtn.disabled = true;
                 
                 for (let i = 0; i < this.currentSequence.length; i++) {
                     const { string, fret } = this.currentSequence[i];
                     const noteBtn = this.getNoteButton(string, fret);
                     const noteName = this.notes[string][fret];
                     
-                    noteBtn.classList.remove('hidden');
-                    noteBtn.classList.add('visible');
-                    
-                    // Play note sound
-                    this.audioEngine.playNote(noteName, string, fret);
-                    
-                    // Haptic feedback on iOS
-                    if (navigator.vibrate) {
-                        navigator.vibrate(50);
+                    if (noteBtn) {
+                        noteBtn.classList.remove('visible');
+                        noteBtn.classList.add('hidden');
                     }
-                    
-                    await this.sleep(1000);
-                    
-                    noteBtn.classList.remove('visible');
-                    noteBtn.classList.add('hidden');
                     
                     await this.sleep(200);
                 }
@@ -1046,8 +977,8 @@
                     this.revealCorrectSequence();
                 }, 1000);
                 
-                this.startBtn.disabled = false;
-                this.showNotesBtn.disabled = true;
+                if (this.startBtn) this.startBtn.disabled = false;
+                if (this.showNotesBtn) this.showNotesBtn.disabled = true;
                 
                 document.querySelectorAll('.note-button').forEach(btn => {
                     btn.classList.remove('clickable');
@@ -1058,8 +989,10 @@
                 this.currentSequence.forEach(({ string, fret }, index) => {
                     setTimeout(() => {
                         const noteBtn = this.getNoteButton(string, fret);
-                        noteBtn.classList.remove('hidden');
-                        noteBtn.classList.add('visible');
+                        if (noteBtn) {
+                            noteBtn.classList.remove('hidden');
+                            noteBtn.classList.add('visible');
+                        }
                     }, index * 300);
                 });
             }
@@ -1076,14 +1009,20 @@
             }
 
             updateMessage(text, type = 'info') {
-                this.message.textContent = text;
-                this.message.className = `message ${type}`;
+                if (this.message) {
+                    this.message.textContent = text;
+                    this.message.className = `message ${type}`;
+                }
             }
 
             updateDisplay() {
-                document.getElementById('level').textContent = this.level;
-                document.getElementById('score').textContent = this.score;
-                document.getElementById('streak').textContent = this.streak;
+                const levelEl = document.getElementById('level');
+                const scoreEl = document.getElementById('score');
+                const streakEl = document.getElementById('streak');
+                
+                if (levelEl) levelEl.textContent = this.level;
+                if (scoreEl) scoreEl.textContent = this.score;
+                if (streakEl) streakEl.textContent = this.streak;
             }
 
             saveProgress() {
@@ -1095,7 +1034,6 @@
                 try {
                     localStorage.setItem('fretboard-memory-progress', JSON.stringify(progress));
                 } catch (e) {
-                    // Handle storage quota exceeded
                     console.log('Could not save progress');
                 }
             }
@@ -1121,8 +1059,8 @@
                 this.updateDisplay();
                 this.updateMessage('¡Memoriza las notas y luego tócalas en el orden correcto!');
                 
-                this.startBtn.disabled = false;
-                this.showNotesBtn.disabled = true;
+                if (this.startBtn) this.startBtn.disabled = false;
+                if (this.showNotesBtn) this.showNotesBtn.disabled = true;
             }
 
             sleep(ms) {
@@ -1161,3 +1099,18 @@
     </script>
 </body>
 </html>
+                        noteBtn.classList.remove('hidden');
+                        noteBtn.classList.add('visible');
+                        
+                        // Play note sound
+                        this.audioEngine.playNote(noteName, string, fret);
+                        
+                        // Haptic feedback on iOS
+                        if (navigator.vibrate) {
+                            navigator.vibrate(50);
+                        }
+                    }
+                    
+                    await this.sleep(1000);
+                    
+                    if (noteBtn) {
