@@ -104,45 +104,52 @@
             background: linear-gradient(to right, #D2691E 0%, #CD853F 100%);
             border-radius: 10px;
             display: grid;
-            grid-template-columns: repeat(13, 1fr);
+            grid-template-columns: repeat(12, 1fr);
             grid-template-rows: repeat(6, 1fr);
             gap: 2px;
             padding: 10px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .fret {
             position: relative;
-            border-right: 2px solid #C0C0C0;
+            border-right: 3px solid #C0C0C0;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                transparent 50%, 
+                rgba(0, 0, 0, 0.1) 100%);
         }
 
         .fret:first-child {
-            border-left: 4px solid #FFD700;
+            border-left: 6px solid #FFD700;
         }
 
-        .fret:nth-child(13n) {
-            border-right: none;
+        .fret:nth-child(12n) {
+            border-right: 4px solid #C0C0C0;
         }
 
         .string-line {
             position: absolute;
             left: 0;
             right: 0;
-            height: 2px;
-            background: #C0C0C0;
+            height: 3px;
+            background: linear-gradient(to right, #E6E6FA 0%, #C0C0C0 50%, #A9A9A9 100%);
             top: 50%;
             transform: translateY(-50%);
             z-index: 1;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .note-button {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             border: none;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -153,6 +160,7 @@
             justify-content: center;
             touch-action: manipulation;
             -webkit-touch-callout: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .note-button.visible {
@@ -271,7 +279,7 @@
             left: 10px;
             right: 10px;
             display: grid;
-            grid-template-columns: repeat(13, 1fr);
+            grid-template-columns: repeat(12, 1fr);
             gap: 2px;
         }
 
@@ -349,13 +357,13 @@
             }
             
             .fretboard {
-                height: 300px;
+                height: 350px;
             }
             
             .note-button {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
             }
             
             .controls {
@@ -378,13 +386,13 @@
             }
             
             .fretboard {
-                height: 250px;
+                height: 280px;
             }
             
             .note-button {
-                width: 25px;
-                height: 25px;
-                font-size: 10px;
+                width: 32px;
+                height: 32px;
+                font-size: 12px;
             }
             
             .game-stats {
@@ -393,6 +401,78 @@
             
             .stat {
                 padding: 10px 15px;
+            }
+        }
+
+        /* Landscape orientation support */
+        @media (orientation: landscape) and (max-height: 600px) {
+            body {
+                padding: 10px;
+                justify-content: flex-start;
+            }
+            
+            .game-header {
+                margin-bottom: 15px;
+            }
+            
+            .game-title {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+            
+            .game-stats {
+                margin-bottom: 10px;
+                gap: 20px;
+            }
+            
+            .stat {
+                padding: 8px 15px;
+            }
+            
+            .fretboard-container {
+                margin: 15px 0;
+                padding: 15px;
+            }
+            
+            .fretboard {
+                height: 250px;
+            }
+            
+            .note-button {
+                width: 35px;
+                height: 35px;
+                font-size: 13px;
+            }
+            
+            .message {
+                margin: 10px 0;
+                padding: 10px;
+                min-height: 40px;
+                font-size: 1rem;
+            }
+            
+            .controls {
+                gap: 15px;
+                margin-top: 15px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Large landscape screens */
+        @media (orientation: landscape) and (min-width: 768px) {
+            .fretboard {
+                height: 300px;
+                max-width: 90vw;
+            }
+            
+            .note-button {
+                width: 45px;
+                height: 45px;
+                font-size: 15px;
             }
         }
 
@@ -493,12 +573,12 @@
                 
                 // Configuración del diapasón (12 trastes, 6 cuerdas)
                 this.notes = [
-                    ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'],
-                    ['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
-                    ['G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'],
-                    ['D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'],
-                    ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'],
-                    ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E']
+                    ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'], // 6ta cuerda (E)
+                    ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], // 5ta cuerda (B)
+                    ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'], // 4ta cuerda (G)
+                    ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'], // 3ra cuerda (D)
+                    ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'], // 2da cuerda (A)
+                    ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E']  // 1ra cuerda (E)
                 ];
                 
                 this.init();
@@ -546,10 +626,10 @@
 
             createFretMarkers() {
                 const fretMarkers = document.getElementById('fretMarkers');
-                for (let i = 0; i <= 12; i++) {
+                for (let i = 0; i < 12; i++) {
                     const marker = document.createElement('div');
                     marker.className = 'fret-number';
-                    marker.textContent = i;
+                    marker.textContent = i + 1;
                     fretMarkers.appendChild(marker);
                 }
             }
@@ -558,7 +638,7 @@
                 this.fretboard.innerHTML = '';
                 
                 for (let string = 0; string < 6; string++) {
-                    for (let fret = 0; fret <= 12; fret++) {
+                    for (let fret = 0; fret < 12; fret++) {
                         const fretDiv = document.createElement('div');
                         fretDiv.className = 'fret';
                         
@@ -618,7 +698,7 @@
                 
                 for (let i = 0; i < sequenceLength; i++) {
                     const string = Math.floor(Math.random() * 6);
-                    const fret = Math.floor(Math.random() * 13);
+                    const fret = Math.floor(Math.random() * 12);
                     this.currentSequence.push({ string, fret });
                 }
             }
