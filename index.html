@@ -31,19 +31,13 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
             color: white;
             min-height: 100vh;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
-            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
         }
 
         .game-container {
@@ -578,6 +572,51 @@
             }
         }
 
+        /* Portrait optimization for better vertical display */
+        @media (orientation: portrait) {
+            body {
+                padding: 15px 10px;
+                justify-content: flex-start;
+            }
+            
+            .game-container {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .game-header {
+                margin-bottom: 20px;
+            }
+            
+            .fretboard-container {
+                margin: 20px 0;
+                padding: 20px 15px;
+            }
+            
+            .fretboard {
+                height: 320px;
+                width: 100%;
+            }
+            
+            .note-button {
+                width: 42px;
+                height: 42px;
+                font-size: 15px;
+            }
+            
+            .controls {
+                margin-top: 20px;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 250px;
+                padding: 12px 20px;
+            }
+        }
+
         /* Portrait optimization for small screens */
         @media (orientation: portrait) and (max-height: 700px) {
             body {
@@ -598,11 +637,46 @@
             }
             
             .fretboard {
-                height: 250px;
+                height: 280px;
+            }
+            
+            .note-button {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
             }
             
             .controls {
                 margin-top: 15px;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 220px;
+                padding: 10px 18px;
+            }
+        }
+
+        /* Portrait for very small screens */
+        @media (orientation: portrait) and (max-height: 600px) {
+            .game-title {
+                font-size: 1.6rem;
+            }
+            
+            .fretboard {
+                height: 240px;
+            }
+            
+            .note-button {
+                width: 32px;
+                height: 32px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                width: 200px;
+                padding: 8px 16px;
+                font-size: 1rem;
             }
         }
 
@@ -704,6 +778,9 @@
                 this.startBtn = document.getElementById('startBtn');
                 this.showNotesBtn = document.getElementById('showNotesBtn');
                 this.resetBtn = document.getElementById('resetBtn');
+                
+                // Initialize audio engine
+                this.audioEngine = new AudioEngine();
                 
                 this.level = 1;
                 this.score = 0;
@@ -846,6 +923,9 @@
             }
 
             async showSequence() {
+                // Initialize audio on first interaction
+                await this.audioEngine.initialize();
+                
                 this.hideAllNotes();
                 this.gameState = 'showing';
                 this.showNotesBtn.disabled = true;
@@ -853,9 +933,13 @@
                 for (let i = 0; i < this.currentSequence.length; i++) {
                     const { string, fret } = this.currentSequence[i];
                     const noteBtn = this.getNoteButton(string, fret);
+                    const noteName = this.notes[string][fret];
                     
                     noteBtn.classList.remove('hidden');
                     noteBtn.classList.add('visible');
+                    
+                    // Play note sound
+                    this.audioEngine.playNote(noteName, string, fret);
                     
                     // Haptic feedback on iOS
                     if (navigator.vibrate) {
@@ -886,6 +970,10 @@
             handleNoteClick(noteBtn) {
                 const string = parseInt(noteBtn.dataset.string);
                 const fret = parseInt(noteBtn.dataset.fret);
+                const noteName = this.notes[string][fret];
+                
+                // Play note sound when clicked
+                this.audioEngine.playNote(noteName, string, fret);
                 
                 this.playerSequence.push({ string, fret });
                 
