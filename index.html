@@ -202,6 +202,111 @@
             75% { transform: translateX(5px); }
         }
 
+        /* ========== SPECIAL EFFECTS ========== */
+        @keyframes musical-celebration {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            25% { transform: scale(1.2) rotate(5deg); }
+            50% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.2) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes rainbow-pulse {
+            0% { background: linear-gradient(45deg, #ff6b35, #f7931e); }
+            25% { background: linear-gradient(45deg, #4CAF50, #45a049); }
+            50% { background: linear-gradient(45deg, #2196F3, #1976D2); }
+            75% { background: linear-gradient(45deg, #9C27B0, #7B1FA2); }
+            100% { background: linear-gradient(45deg, #ff6b35, #f7931e); }
+        }
+
+        /* Musical notes animation */
+        .musical-note {
+            position: absolute;
+            font-size: 30px;
+            color: #ff6b35;
+            animation: float-up 2s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .sparkle-effect {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #fff, #ff6b35);
+            border-radius: 50%;
+            animation: sparkle 1s ease-in-out;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Level complete celebration */
+        .level-complete {
+            animation: musical-celebration 1s ease-in-out;
+        }
+
+        .streak-celebration {
+            animation: rainbow-pulse 2s ease-in-out;
+        }
+
+        /* Medal system */
+        .medal-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+
+        .medal {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: sparkle 0.5s ease-in-out;
+        }
+
+        .medal.bronze {
+            background: linear-gradient(45deg, #CD7F32, #8B4513);
+            color: white;
+        }
+
+        .medal.silver {
+            background: linear-gradient(45deg, #C0C0C0, #808080);
+            color: white;
+        }
+
+        .medal.gold {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: white;
+        }
+
+        .medal.platinum {
+            background: linear-gradient(45deg, #E5E4E2, #BCC6CC);
+            color: #333;
+        }
+
+        .medal.diamond {
+            background: linear-gradient(45deg, #B9F2FF, #00BFFF);
+            color: white;
+            animation: sparkle 1s ease-in-out infinite;
+        }
+
         .controls {
             display: flex;
             justify-content: center;
@@ -319,99 +424,141 @@
         /* Portrait mode (vertical) - Mobile phones */
         @media (orientation: portrait) and (max-width: 768px) {
             body {
-                padding: 5px;
+                padding: 2px;
                 justify-content: flex-start;
                 min-height: 100vh;
+                min-height: -webkit-fill-available;
             }
             
             .game-container {
-                height: 100vh;
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                overflow: hidden;
             }
             
             .game-header {
-                margin-bottom: 10px;
+                margin-bottom: 5px;
+                flex-shrink: 0;
             }
             
             .game-title {
-                font-size: 1.8rem;
-                margin-bottom: 8px;
+                font-size: 1.5rem;
+                margin-bottom: 5px;
             }
             
             .game-stats {
-                gap: 15px;
-                margin-bottom: 10px;
+                gap: 10px;
+                margin-bottom: 5px;
             }
             
             .stat {
-                padding: 8px 15px;
-                min-width: 70px;
+                padding: 6px 12px;
+                min-width: 60px;
             }
             
             .stat-label {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
             
             .stat-value {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             
             .fretboard-container {
-                margin: 10px 0;
-                padding: 15px 10px;
+                margin: 5px 0;
+                padding: 8px 5px;
                 flex: 1;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                position: relative;
+                /* Guitar body shape */
+                border-radius: 50px 50px 20px 20px;
+                background: linear-gradient(to bottom, #8B4513 0%, #A0522D 30%, #CD853F 50%, #A0522D 70%, #8B4513 100%);
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    inset 0 5px 20px rgba(255, 255, 255, 0.1),
+                    inset 0 -5px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .fretboard-container::before {
+                content: '';
+                position: absolute;
+                top: -15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60%;
+                height: 30px;
+                background: linear-gradient(to bottom, #654321, #8B4513);
+                border-radius: 15px 15px 0 0;
+                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
             }
             
             .fretboard {
-                height: 350px;
+                height: calc(100% - 20px);
+                max-height: 300px;
                 width: 100%;
-                max-width: calc(100vw - 40px);
+                max-width: calc(100vw - 20px);
                 margin: 0 auto;
+                border-radius: 15px;
+                /* Enhanced guitar fretboard look */
+                background: linear-gradient(to right, 
+                    #D2691E 0%, 
+                    #CD853F 20%, 
+                    #DEB887 50%, 
+                    #CD853F 80%, 
+                    #D2691E 100%);
+                box-shadow: 
+                    inset 0 3px 15px rgba(0, 0, 0, 0.3),
+                    inset 0 -3px 15px rgba(255, 255, 255, 0.1);
             }
             
             .note-button {
-                width: 45px;
-                height: 45px;
-                font-size: 15px;
+                width: 38px;
+                height: 38px;
+                font-size: 13px;
+                /* Enhanced 3D button effect */
+                box-shadow: 
+                    0 3px 10px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 3px rgba(255, 255, 255, 0.2);
             }
             
             .message {
-                margin: 8px 0;
-                padding: 10px;
-                font-size: 0.95rem;
-                min-height: 40px;
+                margin: 3px 0;
+                padding: 6px;
+                font-size: 0.85rem;
+                min-height: 30px;
+                flex-shrink: 0;
             }
             
             .controls {
                 flex-direction: column;
                 align-items: center;
-                gap: 12px;
-                margin-top: 10px;
-                padding-bottom: 10px;
+                gap: 8px;
+                margin-top: 5px;
+                padding-bottom: 5px;
+                flex-shrink: 0;
             }
             
             .btn {
-                width: 85%;
-                max-width: 300px;
-                padding: 12px 20px;
-                font-size: 1rem;
+                width: 90%;
+                max-width: 280px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
             
             .string-labels {
-                left: -25px;
+                left: -20px;
             }
             
             .string-label {
-                font-size: 11px;
+                font-size: 10px;
             }
             
             .fret-number {
-                font-size: 10px;
+                font-size: 9px;
             }
         }
 
@@ -689,6 +836,7 @@
         </div>
 
         <div class="fretboard-container">
+            <div class="medal-container" id="medalContainer"></div>
             <div class="fret-markers" id="fretMarkers"></div>
             <div class="string-labels">
                 <div class="string-label">E</div>
@@ -809,6 +957,7 @@
                 this.showNotesBtn = document.getElementById('showNotesBtn');
                 this.debugBtn = document.getElementById('debugBtn');
                 this.resetBtn = document.getElementById('resetBtn');
+                this.medalContainer = document.getElementById('medalContainer');
                 
                 // Check if elements exist
                 if (!this.fretboard) {
@@ -827,6 +976,7 @@
                 this.currentSequence = [];
                 this.playerSequence = [];
                 this.showingIndex = 0;
+                this.medals = [];
                 
                 // Configuración del diapasón (12 trastes, 6 cuerdas)
                 this.notes = [
@@ -1149,6 +1299,10 @@
                 this.streak++;
                 this.level++;
                 
+                // 🎵 SPECIAL EFFECTS! 
+                this.triggerLevelCompleteEffects();
+                this.checkForMedals();
+                
                 this.updateDisplay();
                 this.updateMessage(`¡Nivel ${this.level - 1} completado! +${(this.level - 1) * 10} puntos`, 'success');
                 
@@ -1157,7 +1311,167 @@
                 
                 setTimeout(() => {
                     this.startGame();
-                }, 2000);
+                }, 3000); // Increased time to enjoy effects
+            }
+
+            // 🎵 SPECIAL EFFECTS SYSTEM
+            triggerLevelCompleteEffects() {
+                console.log('🎵 Triggering level complete effects!');
+                
+                // Add celebration class to game container
+                const gameContainer = document.querySelector('.game-container');
+                gameContainer.classList.add('level-complete');
+                setTimeout(() => gameContainer.classList.remove('level-complete'), 1000);
+                
+                // Create musical notes animation
+                this.createMusicalNotes();
+                
+                // Create sparkles around the fretboard
+                this.createSparkles();
+                
+                // Streak celebration
+                if (this.streak >= 3) {
+                    this.triggerStreakCelebration();
+                }
+            }
+
+            createMusicalNotes() {
+                const fretboardContainer = document.querySelector('.fretboard-container');
+                const musicalNotes = ['♪', '♫', '♬', '♩', '♯'];
+                
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const note = document.createElement('div');
+                        note.className = 'musical-note';
+                        note.textContent = musicalNotes[Math.floor(Math.random() * musicalNotes.length)];
+                        
+                        // Random position around the fretboard
+                        note.style.left = Math.random() * (fretboardContainer.offsetWidth - 50) + 'px';
+                        note.style.top = Math.random() * (fretboardContainer.offsetHeight - 50) + 'px';
+                        
+                        fretboardContainer.appendChild(note);
+                        
+                        // Remove after animation
+                        setTimeout(() => {
+                            if (note.parentNode) {
+                                note.parentNode.removeChild(note);
+                            }
+                        }, 2000);
+                    }, i * 200);
+                }
+            }
+
+            createSparkles() {
+                const fretboardContainer = document.querySelector('.fretboard-container');
+                
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle-effect';
+                        
+                        // Random position
+                        sparkle.style.left = Math.random() * fretboardContainer.offsetWidth + 'px';
+                        sparkle.style.top = Math.random() * fretboardContainer.offsetHeight + 'px';
+                        
+                        fretboardContainer.appendChild(sparkle);
+                        
+                        // Remove after animation
+                        setTimeout(() => {
+                            if (sparkle.parentNode) {
+                                sparkle.parentNode.removeChild(sparkle);
+                            }
+                        }, 1000);
+                    }, i * 100);
+                }
+            }
+
+            triggerStreakCelebration() {
+                console.log(`🔥 Streak celebration! ${this.streak} in a row!`);
+                
+                // Add rainbow pulse to controls
+                const controls = document.querySelector('.controls');
+                controls.classList.add('streak-celebration');
+                setTimeout(() => controls.classList.remove('streak-celebration'), 2000);
+                
+                // Extra haptic feedback
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100, 50, 100]);
+                }
+            }
+
+            // 🏆 MEDAL SYSTEM
+            checkForMedals() {
+                const newMedals = [];
+                
+                // Bronze medals (easy)
+                if (this.streak >= 3 && !this.hasMedal('bronze-streak')) {
+                    newMedals.push({ type: 'bronze', id: 'bronze-streak', icon: '🥉', title: '3 rachas seguidas' });
+                }
+                if (this.level >= 5 && !this.hasMedal('bronze-level')) {
+                    newMedals.push({ type: 'bronze', id: 'bronze-level', icon: '🎵', title: 'Nivel 5 alcanzado' });
+                }
+                
+                // Silver medals (medium)
+                if (this.streak >= 7 && !this.hasMedal('silver-streak')) {
+                    newMedals.push({ type: 'silver', id: 'silver-streak', icon: '🥈', title: '7 rachas seguidas' });
+                }
+                if (this.score >= 100 && !this.hasMedal('silver-score')) {
+                    newMedals.push({ type: 'silver', id: 'silver-score', icon: '🎼', title: '100 puntos' });
+                }
+                
+                // Gold medals (hard)
+                if (this.streak >= 10 && !this.hasMedal('gold-streak')) {
+                    newMedals.push({ type: 'gold', id: 'gold-streak', icon: '🥇', title: '10 rachas seguidas' });
+                }
+                if (this.level >= 10 && !this.hasMedal('gold-level')) {
+                    newMedals.push({ type: 'gold', id: 'gold-level', icon: '🎸', title: 'Nivel 10 alcanzado' });
+                }
+                
+                // Platinum medals (very hard)
+                if (this.streak >= 15 && !this.hasMedal('platinum-streak')) {
+                    newMedals.push({ type: 'platinum', id: 'platinum-streak', icon: '🏆', title: '15 rachas seguidas' });
+                }
+                if (this.score >= 500 && !this.hasMedal('platinum-score')) {
+                    newMedals.push({ type: 'platinum', id: 'platinum-score', icon: '🌟', title: '500 puntos' });
+                }
+                
+                // Diamond medals (legendary)
+                if (this.streak >= 20 && !this.hasMedal('diamond-legend')) {
+                    newMedals.push({ type: 'diamond', id: 'diamond-legend', icon: '💎', title: 'Leyenda Musical' });
+                }
+                
+                // Add new medals
+                newMedals.forEach(medal => {
+                    this.addMedal(medal);
+                });
+            }
+
+            hasMedal(medalId) {
+                return this.medals.some(medal => medal.id === medalId);
+            }
+
+            addMedal(medal) {
+                console.log(`🏆 New medal earned: ${medal.title}`);
+                this.medals.push(medal);
+                
+                // Create medal element
+                const medalEl = document.createElement('div');
+                medalEl.className = `medal ${medal.type}`;
+                medalEl.textContent = medal.icon;
+                medalEl.title = medal.title;
+                
+                this.medalContainer.appendChild(medalEl);
+                
+                // Medal earning effect
+                setTimeout(() => {
+                    this.updateMessage(`🏆 ¡Nueva medalla! ${medal.title}`, 'success');
+                    
+                    // Extra celebration for diamond medals
+                    if (medal.type === 'diamond') {
+                        this.createSparkles();
+                        this.createMusicalNotes();
+                    }
+                }, 1000);
             }
 
             gameOver() {
@@ -1271,6 +1585,12 @@
                 this.gameState = 'ready';
                 this.currentSequence = [];
                 this.playerSequence = [];
+                this.medals = [];
+                
+                // Clear medals display
+                if (this.medalContainer) {
+                    this.medalContainer.innerHTML = '';
+                }
                 
                 this.hideAllNotes();
                 this.updateDisplay();
