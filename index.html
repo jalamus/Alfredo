@@ -155,12 +155,26 @@
             background: linear-gradient(45deg, #4a90e2, #357abd);
             color: white;
             box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+            transform: scale(1.1);
         }
 
         .note-button.hidden {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            cursor: default;
+        }
+
+        .note-button.clickable {
             background: rgba(255, 255, 255, 0.2);
-            color: transparent;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .note-button.clickable:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
         }
 
         .note-button.correct {
@@ -898,12 +912,16 @@
             }
 
             startMemoryPhase() {
+                console.log('Starting memory phase - player can now click notes');
                 this.gameState = 'playing';
                 this.playerSequence = [];
                 this.updateMessage('¡Ahora toca las notas en el mismo orden!');
                 
+                // Make all notes clickable and show them as interactive
                 document.querySelectorAll('.note-button').forEach(btn => {
                     btn.classList.add('clickable');
+                    btn.classList.remove('visible');
+                    btn.classList.add('hidden');
                 });
             }
 
@@ -998,6 +1016,7 @@
             }
 
             hideAllNotes() {
+                console.log('Hiding all notes');
                 document.querySelectorAll('.note-button').forEach(btn => {
                     btn.classList.remove('visible', 'clickable', 'correct', 'incorrect');
                     btn.classList.add('hidden');
