@@ -314,38 +314,356 @@
             font-weight: bold;
         }
 
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
+        /* ========== MOBILE RESPONSIVE DESIGN ========== */
+        
+        /* Portrait mode (vertical) - Mobile phones */
+        @media (orientation: portrait) and (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 5px;
+                justify-content: flex-start;
+                min-height: 100vh;
+            }
+            
+            .game-container {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .game-header {
+                margin-bottom: 10px;
             }
             
             .game-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+            
+            .game-stats {
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .stat {
+                padding: 8px 15px;
+                min-width: 70px;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .stat-value {
+                font-size: 1.2rem;
             }
             
             .fretboard-container {
-                padding: 20px 15px;
+                margin: 10px 0;
+                padding: 15px 10px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
             
             .fretboard {
-                height: 300px;
+                height: 350px;
+                width: 100%;
+                max-width: calc(100vw - 40px);
+                margin: 0 auto;
             }
             
             .note-button {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
+                width: 45px;
+                height: 45px;
+                font-size: 15px;
+            }
+            
+            .message {
+                margin: 8px 0;
+                padding: 10px;
+                font-size: 0.95rem;
+                min-height: 40px;
             }
             
             .controls {
                 flex-direction: column;
                 align-items: center;
-                gap: 15px;
+                gap: 12px;
+                margin-top: 10px;
+                padding-bottom: 10px;
             }
             
             .btn {
-                width: 250px;
+                width: 85%;
+                max-width: 300px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .string-labels {
+                left: -25px;
+            }
+            
+            .string-label {
+                font-size: 11px;
+            }
+            
+            .fret-number {
+                font-size: 10px;
+            }
+        }
+
+        /* Portrait mode - Small screens (iPhone SE, etc.) */
+        @media (orientation: portrait) and (max-height: 700px) {
+            .game-title {
+                font-size: 1.6rem;
+            }
+            
+            .fretboard {
+                height: 280px;
+            }
+            
+            .note-button {
+                width: 38px;
+                height: 38px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .stat {
+                padding: 6px 12px;
+            }
+        }
+
+        /* Portrait mode - Very small screens */
+        @media (orientation: portrait) and (max-height: 600px) {
+            .game-title {
+                font-size: 1.4rem;
+            }
+            
+            .fretboard {
+                height: 240px;
+            }
+            
+            .note-button {
+                width: 32px;
+                height: 32px;
+                font-size: 11px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Landscape mode (horizontal) - Mobile phones */
+        @media (orientation: landscape) and (max-height: 500px) {
+            body {
+                padding: 5px;
+                overflow: hidden;
+            }
+            
+            .game-container {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                overflow: hidden;
+            }
+            
+            .game-header {
+                margin-bottom: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .game-title {
+                font-size: 1.3rem;
+                margin-bottom: 0;
+                margin-right: 15px;
+            }
+            
+            .game-stats {
+                gap: 10px;
+                margin-bottom: 0;
+                flex: 1;
+                justify-content: flex-end;
+            }
+            
+            .stat {
+                padding: 4px 10px;
+                min-width: 50px;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+                margin-bottom: 2px;
+            }
+            
+            .stat-value {
+                font-size: 1rem;
+            }
+            
+            .fretboard-container {
+                margin: 5px 0;
+                padding: 8px;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .fretboard {
+                height: 200px;
+                width: 100%;
+                max-width: 95vw;
+            }
+            
+            .note-button {
+                width: 32px;
+                height: 32px;
+                font-size: 12px;
+            }
+            
+            .message {
+                margin: 3px 0;
+                padding: 6px;
+                font-size: 0.85rem;
+                min-height: 30px;
+            }
+            
+            .controls {
+                gap: 8px;
+                margin-top: 5px;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                width: auto;
+                min-width: 110px;
+                margin: 2px;
+            }
+            
+            .string-labels {
+                left: -20px;
+            }
+            
+            .string-label {
+                font-size: 9px;
+            }
+            
+            .fret-number {
+                font-size: 8px;
+            }
+        }
+
+        /* Landscape mode - Very small screens (iPhone SE horizontal) */
+        @media (orientation: landscape) and (max-height: 400px) {
+            .game-title {
+                font-size: 1.1rem;
+            }
+            
+            .stat {
+                padding: 2px 6px;
+            }
+            
+            .stat-label {
+                font-size: 0.6rem;
+            }
+            
+            .stat-value {
+                font-size: 0.9rem;
+            }
+            
+            .fretboard {
+                height: 160px;
+            }
+            
+            .note-button {
+                width: 26px;
+                height: 26px;
+                font-size: 10px;
+            }
+            
+            .btn {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+                min-width: 90px;
+            }
+            
+            .message {
+                font-size: 0.75rem;
+                padding: 4px;
+                min-height: 25px;
+            }
+        }
+
+        /* Large landscape screens - Tablets */
+        @media (orientation: landscape) and (min-width: 768px) and (min-height: 600px) {
+            .fretboard {
+                height: 300px;
+                max-width: 90vw;
+            }
+            
+            .note-button {
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+
+        /* Prevent horizontal scrolling on small screens */
+        @media (max-width: 480px) {
+            .fretboard-container {
+                padding: 10px 5px;
+                overflow: hidden;
+            }
+            
+            .fretboard {
+                width: 100%;
+                max-width: calc(100vw - 20px);
+                overflow: hidden;
+            }
+        }
+
+        /* iOS Safari specific optimizations */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                -webkit-user-select: none;
+                -webkit-touch-callout: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .note-button {
+                -webkit-appearance: none;
+                -webkit-user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .btn {
+                -webkit-appearance: none;
+                -webkit-user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Fix iOS viewport issues */
+            @media (orientation: portrait) {
+                .game-container {
+                    min-height: -webkit-fill-available;
+                }
             }
         }
     </style>
